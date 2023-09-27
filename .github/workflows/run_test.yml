@@ -16,7 +16,7 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Install Chrome 114
+      - name: Install Chrome
         run: |
                 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
                 sudo dpkg -i google-chrome-stable_current_amd64.deb 
@@ -24,8 +24,7 @@ jobs:
 
       - name: Install Chrome WebDriver
         run: |
-                CHROME_DRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE_114)
-                curl -o /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
+                curl -o /tmp/chromedriver.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.92/mac-arm64/chromedriver-mac-arm64.zip
                 sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
                 sudo chmod +x /usr/local/bin/chromedriver
 
