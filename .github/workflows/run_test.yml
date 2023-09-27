@@ -1,7 +1,18 @@
 name: Automated tests
 
 on:
-  push
+  workflow_dispatch:
+    inputs:
+      deployment_target:
+        description: Run positive | negative | other
+        required: true
+        default: positive
+        type: choice
+        options:
+          - positive
+          - negative
+          - all
+
 
 jobs:
   test:
@@ -30,5 +41,14 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: positive
+        if: "github.event.inputs.deployment_target == 'positive'"
+        run: pytest -m positive
+
+      - name: negative
+        if: "github.event.inputs.deployment_target == 'negative'"
+        run: pytest -m negative
+
       - name: Run tests
-        run: pytest
+        if: "github.event.inputs.deployment_target == 'all'"
+        run: pytest -m "not positive and not negative"
