@@ -11,7 +11,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 def driver(request):    # and driver = request.param
     driver = request.config.getoption("--browser")
     if driver == "chrome":
-        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+        driver = webdriver.Chrome()
         driver.maximize_window()
     elif driver == "firefox":
         driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
