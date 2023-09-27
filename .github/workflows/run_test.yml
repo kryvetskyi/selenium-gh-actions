@@ -32,8 +32,8 @@ jobs:
                 ls -la
                 sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
                 echo "Contents of current directory:"
-                ls -la
-                sudo chmod +x /usr/local/bin/chromedriver
+                ls -la /usr/local/bin/
+                sudo chmod +x /usr/local/bin/chromedriver-linux64/chromedriver
 
       - name: Install Chrome
         run: sudo apt-get install google-chrome-stable
