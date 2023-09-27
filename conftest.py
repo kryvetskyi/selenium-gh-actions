@@ -28,6 +28,7 @@ def driver(request):
     if headless:
         options.add_argument("--headless")
     options.binary_location = get_chrome_path_binary()
+    options.add_argument("--headless")
 
     if driver == "chrome":
         driver = webdriver.Chrome(options=options)
