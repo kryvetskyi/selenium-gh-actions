@@ -20,7 +20,7 @@ jobs:
         run: |
                 curl -o /tmp/chrome.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.92/linux64/chrome-linux64.zip
                 sudo unzip /tmp/chrome.zip -d ./binaries
-          
+        
 
       - name: List contents of 'binaries' directory
         run: |
