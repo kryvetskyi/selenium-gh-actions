@@ -18,9 +18,8 @@ jobs:
 
       - name: Install Chrome
         run: |
-                wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
-                sudo dpkg -i google-chrome-stable_current_amd64.deb 
-                sudo apt-get -f install
+                curl -o /tmp/chrome.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.92/mac-arm64/chrome-mac-arm64.zip
+                sudo unzip /tmp/chromed.zip -d .
 
       - name: Install Chrome WebDriver
         run: |
