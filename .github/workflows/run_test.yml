@@ -20,25 +20,11 @@ jobs:
         run: |
                 curl -o /tmp/chrome.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.92/linux64/chrome-linux64.zip
                 sudo unzip /tmp/chrome.zip -d ./binaries
-        
-
-      - name: List contents of 'binaries' directory
-        run: |
-                ls -la binaries
-
-      - name: List contents of 'binaries' directory
-        run: |
-                ls -la binaries/chrome-linux64
-              
 
       - name: Install Chrome WebDriver
         run: |
                 curl -o /tmp/chromedriver.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.92/linux64/chromedriver-linux64.zip
                 sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
-                echo "Current directory: $(pwd)"
-                echo "Contents of current directory:"
-                ls -la
-          
                 sudo chmod +x /usr/local/bin/chromedriver-linux64/chromedriver
 
       - name: Install dependencies
@@ -46,6 +32,3 @@ jobs:
 
       - name: Run tests
         run: pytest
-
-
-
