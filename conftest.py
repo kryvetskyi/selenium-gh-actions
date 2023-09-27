@@ -28,7 +28,6 @@ def driver(request):
     if headless:
         options.add_argument("--headless")
     options.binary_location = get_chrome_path_binary()
-    # options.add_argument("--headless")
 
     if driver == "chrome":
         driver = webdriver.Chrome(options=options)
@@ -43,8 +42,6 @@ def driver(request):
 
 
 def pytest_addoption(parser):
-    parser.addoption(
-        "--browser", action="store", default="chrome", help="Please provide correct browser"
-    )
-    parser.addoption("--headless", default="true", help="Run the browser in headless mode")
+    parser.addoption("--browser", action="store", default="chrome", help="Please provide correct browser")
+    parser.addoption("--headless", default="true", help="Run browser in headless mode true | false")
 
