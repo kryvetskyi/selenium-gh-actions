@@ -27,6 +27,9 @@ jobs:
       - name: Install Chrome WebDriver
         run: |
                 curl -o /tmp/chromedriver.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.92/linux64/chromedriver-linux64.zip
+                echo "Current directory: $(pwd)"
+                echo "Contents of current directory:"
+                ls -la
                 sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
                 echo "Contents of current directory:"
                 ls -la
