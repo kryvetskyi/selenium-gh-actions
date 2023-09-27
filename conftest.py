@@ -1,4 +1,5 @@
 from pathlib import Path
+import platform
 
 import pytest
 from selenium import webdriver
@@ -9,8 +10,12 @@ from webdriver_manager.firefox import GeckoDriverManager
 
 def get_chrome_path_binary():
     project_root = Path(__file__).resolve().parent
-    chrome_executable_path = project_root / "binaries" / "chrome-mac-arm64" / "Google Chrome for Testing.app" / \
+    if platform.system() == "Linux":
+        chrome_executable_path = project_root / "binaries" / "chrome-linux64" / "chrome"
+    else:
+        chrome_executable_path = project_root / "binaries" / "chrome-mac-arm64" / "Google Chrome for Testing.app" / \
                                             "Contents" / "MacOS" / "Google Chrome for Testing"
+    print('PATH IS:', chrome_executable_path)
     return str(chrome_executable_path)
 
 
