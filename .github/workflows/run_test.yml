@@ -24,6 +24,10 @@ jobs:
       - name: List contents of 'binaries' directory
         run: |
                 ls -la binaries
+
+      - name: List contents of 'binaries' directory
+        run: |
+                ls -la binaries/chrome-linux64
               
 
       - name: Install Chrome WebDriver
