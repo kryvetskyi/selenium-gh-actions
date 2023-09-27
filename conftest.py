@@ -11,7 +11,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 def get_chrome_path_binary():
     project_root = Path(__file__).resolve().parent
     if platform.system() == "Linux":
-        chrome_executable_path = "/usr/bin/google-chrome"
+        chrome_executable_path = project_root / "binaries" / "chrome-linux64" / "chrome"
     else:
         chrome_executable_path = project_root / "binaries" / "chrome-mac-arm64" / "Google Chrome for Testing.app" / \
                                             "Contents" / "MacOS" / "Google Chrome for Testing"
@@ -22,6 +22,7 @@ def get_chrome_path_binary():
 @pytest.fixture()
 def driver(request):
     options = webdriver.ChromeOptions()
+    options.add_argument("--headless")
     options.binary_location = get_chrome_path_binary()
 
     driver = request.config.getoption("--browser")
