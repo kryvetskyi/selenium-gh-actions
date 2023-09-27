@@ -20,8 +20,9 @@ jobs:
         run: |
                 curl -o /tmp/chrome.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.92/linux64/chrome-linux64.zip
                 sudo unzip /tmp/chrome.zip -d ./binaries
-                echo "Current directory: $(pwd)"
-                echo "Contents of binaries"
+
+      - name: List contents of 'binaries' directory
+        run: |
                 ls -la binaries
               
 
