@@ -24,6 +24,7 @@ jobs:
       - name: Install Chrome WebDriver
         run: |
                 curl -o /tmp/chromedriver.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.92/mac-arm64/chromedriver-mac-arm64.zip
+                sudo mkdir -p /usr/local/bin/
                 sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
                 sudo chmod +x /usr/local/bin/chromedriver
 
