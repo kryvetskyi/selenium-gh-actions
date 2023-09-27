@@ -19,7 +19,8 @@ jobs:
       - name: Install Chrome
         run: |
                 curl -o /tmp/chrome.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.92/mac-arm64/chrome-mac-arm64.zip
-                pwd
+                echo "Current directory: $(pwd)"
+                echo "Contents of current directory:"
                 ls -la
                 sudo unzip /tmp/chrome.zip -d .
 
@@ -27,6 +28,8 @@ jobs:
         run: |
                 curl -o /tmp/chromedriver.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.92/linux64/chromedriver-linux64.zip
                 sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
+                echo "Contents of current directory:"
+                ls -la
                 sudo chmod +x /usr/local/bin/chromedriver
 
       - name: Install Chrome
