@@ -16,10 +16,13 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Install Chrome
+
+      - name: Install Chrome on Linux
         run: |
-                curl -o /tmp/chrome.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.92/linux64/chrome-linux64.zip
-                sudo unzip /tmp/chrome.zip -d ./binaries
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome-stable_current_amd64.deb
+          sudo apt-get install -f
+          continue-on-error: true
 
       - name: List contents of 'binaries' directory
         run: |

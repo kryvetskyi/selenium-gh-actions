@@ -11,7 +11,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 def get_chrome_path_binary():
     project_root = Path(__file__).resolve().parent
     if platform.system() == "Linux":
-        chrome_executable_path = project_root / "binaries" / "chrome-linux64" / "chrome"
+        chrome_executable_path = "/usr/bin/google-chrome"
     else:
         chrome_executable_path = project_root / "binaries" / "chrome-mac-arm64" / "Google Chrome for Testing.app" / \
                                             "Contents" / "MacOS" / "Google Chrome for Testing"
