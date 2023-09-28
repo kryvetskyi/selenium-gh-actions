@@ -46,6 +46,3 @@ def install_chrome():
         finally:
             print('Deleting zip chrome folder')
             subprocess.run(["rm", "-rf", "/tmp/chrome.zip"])
-
-
-install_chrome()
