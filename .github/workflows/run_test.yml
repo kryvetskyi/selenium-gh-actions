@@ -79,7 +79,8 @@ jobs:
         run: pip install -r requirements.txt
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v3
-
+      - name: Run tests
+        run: pytest -m ${{ github.event.inputs.deployment_target }} --alluredir=allure-results
       - name: Store allure results
         uses: actions/upload-artifact@v3
         with:
