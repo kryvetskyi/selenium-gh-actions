@@ -75,7 +75,7 @@ jobs:
         with:
           name: _site
           path:
-            _ site
+            _site
           retention-days: 1
 
   publish-report:
@@ -85,9 +85,6 @@ jobs:
     steps:
       - name: Download all artifacts
         uses: actions/download-artifact@v3
-        
-      - name: Create _site directory
-        run: mkdir _site
         
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v2
