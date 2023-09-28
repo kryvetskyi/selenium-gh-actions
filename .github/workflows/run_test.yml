@@ -14,40 +14,81 @@ on:
           - all
 
 jobs:
+
   test:
     runs-on: ubuntu-22.04
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
       - name: Install Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-
       - name: Install Chrome
         run: |
                 curl -o /tmp/chrome.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.92/linux64/chrome-linux64.zip
                 sudo unzip /tmp/chrome.zip -d ./binaries
-
       - name: Install Chrome WebDriver
         run: |
                 curl -o /tmp/chromedriver.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.92/linux64/chromedriver-linux64.zip
                 sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
                 sudo chmod +x /usr/local/bin/chromedriver-linux64/chromedriver
-
       - name: Install dependencies
         run: pip install -r requirements.txt
-
       - name: positive
         if: "github.event.inputs.deployment_target == 'positive'"
         run: pytest -m positive
-
       - name: negative
         if: "github.event.inputs.deployment_target == 'negative'"
         run: pytest -m negative
-
       - name: Run tests
         if: "github.event.inputs.deployment_target == 'all'"
         run: pytest -m "not positive and not negative"
+      - name: Save allure-results
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-results
+          path:
+            allure-results
+          retention-days: 1
+
+  generate-report:
+    runs-on: ubuntu-22.04
+    needs: test
+    name: Generate allure-report
+    steps:
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'microsoft'
+          java-version: '17'
+      - run: sudo wget https://github.com/allure-framework/allure2/releases/download/2.23.1/allure-2.23.1.tgz && sudo tar -zxvf allure-2.23.1.tgz -C /opt/ && sudo ln -s /opt/allure-2.23.1/bin/allure /usr/bin/allure
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+      - run: allure generate -c allure-results -o _site
+      - name: Save generated allure report
+        uses: actions/download-artifact@v3
+        with:
+          name: _site
+          path:
+            _ site
+          retention-days: 1
+
+  publish-report:
+    runs-on: ubuntu-22.04
+    needs: generate-report
+    name: Publish allure report
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v2
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1.2.9
+
+
+
+
+
+
+
