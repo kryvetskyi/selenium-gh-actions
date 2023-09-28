@@ -6,7 +6,7 @@ on:
       deployment_target:
         description: Choose target
         required: true
-        default: second_test
+        default: positive
         type: choice
         options:
           - positive
@@ -80,21 +80,8 @@ jobs:
         run: pip install -r requirements.txt
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v3
-      - name: first_test
-        if: "github.event.inputs.deployment_target == 'first_test'"
-        run: pytest tests/test_button.py::test_button_exist --alluredir=allure-results
-        continue-on-error: true
-      - name: positive
-        if: "github.event.inputs.deployment_target == 'positive'"
-        run: pytest -m positive --alluredir=allure-results
-        continue-on-error: true
-      - name: negative
-        if: "github.event.inputs.deployment_target == 'negative'"
-        run: pytest -m negative --alluredir=allure-results
-        continue-on-error: true
-      - name: other
-        if: "github.event.inputs.deployment_target == 'other'"
-        run: pytest -m "not positive and not negative" --alluredir=allure-results
+      - name: Run tests
+        run: pytest -m ${{ github.event.inputs.deployment_target }} --alluredir=allure-results
         continue-on-error: true
       - name: Store allure results
         uses: actions/upload-artifact@v3
