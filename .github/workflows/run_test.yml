@@ -37,13 +37,13 @@ jobs:
         run: pip install -r requirements.txt
       - name: positive
         if: "github.event.inputs.deployment_target == 'positive'"
-        run: pytest -m positive
+        run: pytest -m positive --alluredir=allure-results
       - name: negative
         if: "github.event.inputs.deployment_target == 'negative'"
-        run: pytest -m negative
+        run: pytest -m negative --alluredir=allure-results
       - name: Run tests
         if: "github.event.inputs.deployment_target == 'all'"
-        run: pytest -m "not positive and not negative"
+        run: pytest -m "not positive and not negative" --alluredir=allure-results
       - name: Save allure-results
         uses: actions/upload-artifact@v3
         with:
