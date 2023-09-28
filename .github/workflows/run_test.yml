@@ -13,7 +13,6 @@ on:
           - negative
           - all
 
-
 jobs:
   test:
     runs-on: ubuntu-22.04
