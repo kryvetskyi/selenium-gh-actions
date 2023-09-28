@@ -42,8 +42,6 @@ def driver(request):
 
 
 def pytest_addoption(parser):
-    parser.addoption(
-        "--browser", action="store", default="chrome", help="Please provide correct browser"
-    )
-    parser.addoption("--headless", action="store_true", help="Run the browser in headless mode")
+    parser.addoption("--browser", action="store", default="chrome", help="Please provide correct browser")
+    parser.addoption("--headless", default="true", help="Run browser in headless mode true | false")
 
