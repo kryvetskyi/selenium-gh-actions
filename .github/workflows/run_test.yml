@@ -9,9 +9,9 @@ on:
         default: second_test
         type: choice
         options:
-          - first_test
-          - second_test
-          - all
+          - positive
+          - negative
+          - other
 
 permissions:
   contents: read
