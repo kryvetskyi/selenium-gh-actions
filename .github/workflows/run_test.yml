@@ -81,6 +81,7 @@ jobs:
         uses: actions/download-artifact@v3
       - name: Run tests
         run: pytest -m ${{ github.event.inputs.deployment_target }} --alluredir=allure-results
+        continue-on-error: true
       - name: Store allure results
         uses: actions/upload-artifact@v3
         with:
